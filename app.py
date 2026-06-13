@@ -6,10 +6,8 @@ import torchvision.transforms as transforms
 import torchvision.models as models
 from PIL import Image
 
-# Page config
 st.set_page_config(page_title="KrishiDost", page_icon="🌿", layout="centered")
 
-# Disease info
 disease_info = {
     "Bacterial_spot": {
         "cause": "Bacterial infection (Xanthomonas campestris). Spreads through rain and wind.",
@@ -93,7 +91,6 @@ disease_info = {
     }
 }
 
-# Class names in same order as training
 tomato_class_names = [
     'Tomato___Bacterial_spot',
     'Tomato___Early_blight',
@@ -107,7 +104,6 @@ tomato_class_names = [
     'Tomato___healthy'
 ]
 
-# Load model
 @st.cache_resource
 def load_model():
     model = models.mobilenet_v2(pretrained=False)
@@ -121,7 +117,6 @@ def load_model():
 
 model = load_model()
 
-# Transform
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -134,7 +129,6 @@ def get_info_key(raw_name):
             return key
     return None
 
-# UI
 st.title("🌿 KrishiDost")
 st.subheader("Tomato Leaf Disease Detector")
 st.write("Upload a photo of a tomato leaf and get an instant diagnosis.")
@@ -143,6 +137,8 @@ uploaded_file = st.file_uploader("Upload leaf image", type=["jpg", "jpeg", "png"
 
 if uploaded_file:
     image = Image.open(uploaded_file).convert('RGB')
+    if image.size[0] > 1000 or image.size[1] > 1000:
+        image = image.resize((800, 800))
     st.image(image, caption="Uploaded Leaf", use_container_width=True)
 
     with st.spinner("Analyzing..."):
