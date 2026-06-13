@@ -1,5 +1,6 @@
 # 🌿 KrishiDost — Tomato Leaf Disease Detector
-
+## 🌐 Live Demo
+👉 [Try KrishiDost here](https://ananya0-krishidost.hf.space)
 KrishiDost ("Farmer's Friend") is an AI-powered web app that helps farmers identify tomato leaf diseases instantly from a photo and get actionable treatment advice.
 
 ## 🎯 Problem
